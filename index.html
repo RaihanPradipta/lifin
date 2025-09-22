@@ -1,0 +1,390 @@
+<<<<<<< HEAD
+=======
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LIFIN - Literasi Finansial Interaktif</title>
+    <style>
+        :root {
+            --blue: #55C1FF;
+            --yellow: #FDCA40;
+            --white: #FAF3DD;
+            --dark-text: #333333;
+            --light-text: #FFFFFF;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--white);
+            color: var(--dark-text);
+        }
+        
+        header {
+            background-color: var(--blue);
+            color: var(--light-text);
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .game-container {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .instructions {
+            background-color: var(--blue);
+            color: var(--light-text);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .drag-drop-area {
+            display: flex;
+            justify-content: space-between;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .items-container, .category-container {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .items-container {
+            background-color: rgba(85, 193, 255, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            border: 2px dashed var(--blue);
+        }
+        
+        .draggable-item {
+            background-color: var(--yellow);
+            color: var(--dark-text);
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 6px;
+            cursor: move;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            user-select: none;
+        }
+        
+        .draggable-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        
+        .category {
+            background-color: var(--blue);
+            color: var(--light-text);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            min-height: 120px;
+        }
+        
+        .category h3 {
+            margin-bottom: 0.5rem;
+            text-align: center;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.3);
+        }
+        
+        .category-items {
+            min-height: 50px;
+            padding: 0.5rem;
+        }
+        
+        .score-container {
+            background-color: var(--yellow);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .btn-check {
+            background-color: var(--blue);
+            color: var(--light-text);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: background-color 0.3s ease;
+        }
+        
+        .btn-check:hover {
+            background-color: #3AA1E0;
+        }
+        
+        .feedback {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 8px;
+            display: none;
+        }
+        
+        .feedback.success {
+            background-color: #4CAF50;
+            color: white;
+            display: block;
+        }
+        
+        .feedback.error {
+            background-color: #F44336;
+            color: white;
+            display: block;
+        }
+        
+        @media (max-width: 768px) {
+            .drag-drop-area {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">LIFIN</div>
+        <p>Literasi Finansial Interaktif</p>
+    </header>
+    
+    <div class="container">
+        <div class="instructions">
+            <h2>Pengelolaan Keuangan Pintar</h2>
+            <p>Drag and drop item pengeluaran ke kategori yang tepat untuk belajar mengelola keuangan dengan bijak!</p>
+        </div>
+        
+        <div class="game-container">
+            <div class="drag-drop-area">
+                <div class="items-container">
+                    <h2>Item Pengeluaran</h2>
+                    <div id="items">
+                        <div class="draggable-item" draggable="true" data-category="kebutuhan">Belanja bahan makanan bulanan</div>
+                        <div class="draggable-item" draggable="true" data-category="keinginan">Nonton bioskop</div>
+                        <div class="draggable-item" draggable="true" data-category="tabungan">Dana darurat</div>
+                        <div class="draggable-item" draggable="true" data-category="investasi">Saham</div>
+                        <div class="draggable-item" draggable="true" data-category="kebutuhan">Tagihan listrik</div>
+                        <div class="draggable-item" draggable="true" data-category="keinginan">Beli gadget baru</div>
+                        <div class="draggable-item" draggable="true" data-category="tabungan">Tabungan pendidikan</div>
+                        <div class="draggable-item" draggable="true" data-category="investasi">Reksadana</div>
+                        <div class="draggable-item" draggable="true" data-category="kebutuhan">Transportasi ke kantor</div>
+                        <div class="draggable-item" draggable="true" data-category="keinginan">Makan di restoran mewah</div>
+                    </div>
+                </div>
+                
+                <div class="category-container">
+                    <h2>Kategori Keuangan</h2>
+                    <div class="category" data-category="kebutuhan">
+                        <h3>Kebutuhan (50%)</h3>
+                        <div class="category-items" id="kebutuhan"></div>
+                    </div>
+                    <div class="category" data-category="keinginan">
+                        <h3>Keinginan (30%)</h3>
+                        <div class="category-items" id="keinginan"></div>
+                    </div>
+                    <div class="category" data-category="tabungan">
+                        <h3>Tabungan (10%)</h3>
+                        <div class="category-items" id="tabungan"></div>
+                    </div>
+                    <div class="category" data-category="investasi">
+                        <h3>Investasi (10%)</h3>
+                        <div class="category-items" id="investasi"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="score-container">
+                <div id="score">Skor: 0</div>
+                <button class="btn-check" id="checkAnswers">Periksa Jawaban</button>
+                <div class="feedback" id="feedback"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let dragged;
+            let score = 0;
+            const totalItems = document.querySelectorAll('.draggable-item').length;
+            const scoreDisplay = document.getElementById('score');
+            const feedbackDisplay = document.getElementById('feedback');
+            
+            // Set up drag and drop for items
+            document.addEventListener('dragstart', function(event) {
+                dragged = event.target;
+                event.target.style.opacity = 0.5;
+            });
+            
+            document.addEventListener('dragend', function(event) {
+                event.target.style.opacity = 1;
+            });
+            
+            // Handle dropping items into categories
+            document.addEventListener('dragover', function(event) {
+                event.preventDefault();
+            });
+            
+            document.addEventListener('dragenter', function(event) {
+                if (event.target.className === 'category-items') {
+                    event.target.style.background = 'rgba(255, 255, 255, 0.2)';
+                }
+            });
+            
+            document.addEventListener('dragleave', function(event) {
+                if (event.target.className === 'category-items') {
+                    event.target.style.background = '';
+                }
+            });
+            
+            document.addEventListener('drop', function(event) {
+                event.preventDefault();
+                
+                // Reset background of drop target
+                if (event.target.className === 'category-items') {
+                    event.target.style.background = '';
+                    
+                    // Move dragged element to the drop target
+                    dragged.parentNode.removeChild(dragged);
+                    event.target.appendChild(dragged);
+                }
+            });
+            
+            // Check answers when button is clicked
+            document.getElementById('checkAnswers').addEventListener('click', function() {
+                let correctAnswers = 0;
+                const categories = document.querySelectorAll('.category');
+                
+                categories.forEach(category => {
+                    const categoryType = category.getAttribute('data-category');
+                    const items = category.querySelectorAll('.draggable-item');
+                    
+                    items.forEach(item => {
+                        if (item.getAttribute('data-category') === categoryType) {
+                            correctAnswers++;
+                            item.style.backgroundColor = '#4CAF50';
+                            item.style.color = 'white';
+                        } else {
+                            item.style.backgroundColor = '#F44336';
+                            item.style.color = 'white';
+                        }
+                    });
+                });
+                
+                score = correctAnswers;
+                scoreDisplay.textContent = `Skor: ${score} dari ${totalItems}`;
+                
+                // Show feedback
+                feedbackDisplay.textContent = score === totalItems 
+                    ? 'Hebat! Anda telah berhasil mengkategorikan semua item dengan benar!' 
+                    : `Anda berhasil mengkategorikan ${score} dari ${totalItems} item. Coba lagi!`;
+                
+                feedbackDisplay.className = 'feedback ' + (score === totalItems ? 'success' : 'error');
+            });
+            
+            // Reset game function
+            function resetGame() {
+                const items = document.querySelectorAll('.draggable-item');
+                const itemsContainer = document.getElementById('items');
+                
+                items.forEach(item => {
+                    // Reset style
+                    item.style.backgroundColor = '';
+                    item.style.color = '';
+                    
+                    // Move back to items container
+                    item.parentNode.removeChild(item);
+                    itemsContainer.appendChild(item);
+                });
+                
+                score = 0;
+                scoreDisplay.textContent = 'Skor: 0';
+                feedbackDisplay.className = 'feedback';
+            }
+            
+            // Add additional educational content
+            function showTips(category) {
+                const tips = {
+                    kebutuhan: [
+                        "Kebutuhan adalah hal-hal yang esensial untuk kelangsungan hidup",
+                        "Alokasikan sekitar 50% pendapatan untuk kebutuhan dasar",
+                        "Termasuk: sewa/cicilan rumah, makanan pokok, transportasi esensial"
+                    ],
+                    keinginan: [
+                        "Keinginan adalah hal-hal yang menyenangkan tapi tidak esensial",
+                        "Batasi sekitar 30% pendapatan untuk keinginan",
+                        "Pikirkan dua kali sebelum membeli barang non-esensial"
+                    ],
+                    tabungan: [
+                        "Tabungan untuk dana darurat dan tujuan jangka pendek",
+                        "Idealnya miliki dana darurat setara 3-6 bulan biaya hidup",
+                        "Tempatkan di instrumen yang likuid dan minim risiko"
+                    ],
+                    investasi: [
+                        "Investasi untuk pertumbuhan kekayaan jangka panjang",
+                        "Mulai investasi sedini mungkin untuk memanfaatkan bunga majemuk",
+                        "Diversifikasi portfolio untuk mengurangi risiko"
+                    ]
+                };
+                
+                // Display tips based on category
+                // This functionality can be expanded
+            }
+            
+            // Add level progression
+            let currentLevel = 1;
+            const maxLevel = 3;
+            
+            function loadLevel(level) {
+                // Here you would load different sets of items based on level
+                // This is just a skeleton implementation
+                resetGame();
+                
+                // Example: could load different scenarios for different levels
+                if (level === 2) {
+                    // Load more complex items for level 2
+                } else if (level === 3) {
+                    // Load advanced concepts for level 3
+                }
+            }
+            
+            // Initialize tooltips or help functionality
+            function initializeTooltips() {
+                // Add tooltip functionality here
+            }
+            
+            // Initialize the game
+            initializeTooltips();
+        });
+    </script>
+</body>
+</html>
+>>>>>>> cbe978aa445c40ef129ca9ca86a4c9c7dc101aa0
